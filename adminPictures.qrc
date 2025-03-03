@@ -1,0 +1,5 @@
+<RCC>
+  <qresource prefix="png">
+    <file>uiPictrues/noPicture.png</file>
+  </qresource>
+</RCC>
