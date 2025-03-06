@@ -12,6 +12,7 @@ import json # JSON-objektien ja tiedostojen käsittely
 # Asennuksen vaativat kirjastot
 from PySide6 import QtWidgets # Qt-vimpaimet
 from PySide6 import QtGui # Pixmap-muutoksia varten
+from PySide6.QtCore import QDate
 
 
 # Käyttöliittymämoduulien lataukset
@@ -67,7 +68,12 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # Poistettavan auton rekisterinumero
         self.vehicleToDelete = ''
         self.personToDelete = ''
-        self.groupToDelete = ''
+
+        # Kuluvan päivän ja vuoden määritys
+        # TODO: tee slotti, joka päivittää nykyisen ajan
+        self.today = QDate.currentDate()
+        self.currentYear = str(self.today.toPython())[0:4]
+        self.firstDayOfYear = QDate(int(self.currentYear), 1, 1)
 
         # OHJELMOIDUT SIGNAALIT
         # ---------------------
@@ -82,19 +88,16 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.tabWidget.currentChanged.connect(self.updateCombos)
 
         # Painikkeet
-        self.ui.saveGroupPushButton.clicked.connect(self.saveGroup)
         self.ui.savePersonPushButton.clicked.connect(self.savePerson)
         self.ui.saveVehiclePushButton.clicked.connect(self.saveVehicle)
         self.ui.openPicturePushButton.clicked.connect(self.openPicture)
         self.ui.deleteVehiclePusButton.clicked.connect(self.deleteVehicle)
         self.ui.deletePersonPushButton.clicked.connect(self.deletePerson)
-        self.ui.deleteGroupPushButton.clicked.connect(self.deleteGroup)
 
 
         # Taulukko soluvalinnat
         self.ui.vehicleCatalogTableWidget.cellClicked.connect(self.setRegisterNumber)
         self.ui.registeredPersonsTableWidget.cellClicked.connect(self.setSNN)
-        self.ui.savedGroupsTableWidget.cellClicked.connect(self.setGroup)
         
     # OHJELMOIDUT SLOTIT
     # ==================
@@ -122,19 +125,19 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # Auton kuvaksi kameran kuva
         self.vehiclePicture = 'uiPictrues\\noPicture.png' # Kuvan poluksi ei kuvaa symboli
         self.ui.vehiclePictureLabel.setPixmap(QtGui.QPixmap(self.vehiclePicture)) # Auton kuvan päivitys
-        self.updateCombos() # Ryhmän valinta yhdistelmäruudun arvot
+        self.updateCombos() # Yhdistelmäruudun arvot
         self.updateLenderTableWidget() # Lainaajien tiedot
         self.updateVehicleTableWidget() # Autojen tiedot
-        self.updateGroupTableWidget() # Ryhmien tiedot
         self.updateDiaryTableWidget() # Ajopäiväkirja
         self.ui.deleteVehiclePusButton.setEnabled(False) # Otetaan auton poisto-painike pois käytöstä
-        self.ui.deleteGroupPushButton.setEnabled(False) # Lainaajan poisto-painike
-        self.ui.deletePersonPushButton.setEnabled(False) # Ryhmän poisto-painike
+        self.ui.deletePersonPushButton.setEnabled(False) # Lainaajan poisto-painike pois käytöstä
+        self.ui.endingDateEdit.setDate(self.today)
+        self.ui.beginingDateEdit.setDate(self.firstDayOfYear)
 
     # Välilehtien slotit
     # ------------------
 
-    # Ryhmän valinta -ruudun arvojen päivitys
+    # Valinta -ruudun arvojen päivitys
     def updateCombos(self):
 
         # Luetaan tietokanta-asetukset paikallisiin muuttujiin
@@ -142,17 +145,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         plainTextPassword = self.plainTextPassword
         dbSettings['password'] = plainTextPassword # Vaihdetaan selväkieliseksi 
 
-        # Luodaan tietokantayhteys-olio
-        dbConnection = dbOperations.DbConnection(dbSettings)
-
-        # Tehdään lista ryhmät-yhdistelmäruudun arvoista
-        groupList = dbConnection.readColumsFromTable('ryhma', ['ryhma'])
-        groupStringList = []
-        for item in groupList:
-            stringValue = str(item[0])
-            groupStringList.append(stringValue)
-        self.ui.groupComboBox.clear()
-        self.ui.groupComboBox.addItems(groupStringList)
 
 
         # Tehdään lista ajoneuvotyypit-yhdistelmäruudun arvoista
@@ -160,16 +152,17 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         dbConnection = dbOperations.DbConnection(dbSettings)
 
         # Tehdään lista ryhmät-yhdistelmäruudun arvoista
-        groupList = dbConnection.readColumsFromTable('ajoneuvotyyppi', ['tyyppi'])
-        groupStringList = []
-        for item in groupList:
+        typeList = dbConnection.readColumsFromTable('ajoneuvotyyppi', ['tyyppi'])
+        typeStringList = []
+        for item in typeList:
             stringValue = str(item[0])
-            groupStringList.append(stringValue)
+            typeStringList.append(stringValue)
         self.ui.vehicleTypeComboBox.clear()
-        self.ui.vehicleTypeComboBox.addItems(groupStringList)
+        self.ui.vehicleTypeComboBox.addItems(typeStringList)
 
         # Lista ajopäiväkirjoista -> raporttinäkymien nimet
-        self.ui.reportTypecomboBox.addItem('Ajopäiväkirja -kaikki')
+        self.ui.reportTypecomboBox.addItem('Ajopäiväkirja')
+        self.ui.reportTypecomboBox.addItem('Autoittain')
 
 
     # Lainaajat-taulukon päivitys
@@ -189,7 +182,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.registeredPersonsTableWidget.clearContents()
 
         # Määritellään taulukkoelementin otsikot
-        headerRow = ['Henkilötunnus', 'Etunimi', 'Sukunimi', 'Ryhmä', 'Ajokortti', 'sähköposti']
+        headerRow = ['Henkilötunnus', 'Etunimi', 'Sukunimi', 'Ajokortti', 'Automaatti', 'Sähköposti']
         self.ui.registeredPersonsTableWidget.setHorizontalHeaderLabels(headerRow)
 
         # Asetetaan taulukon solujen arvot
@@ -217,7 +210,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.vehicleCatalogTableWidget.clearContents()
 
         # Määritellään taulukkoelementin otsikot
-        headerRow = ['Rekisteri', 'Merkki', 'Malli', 'Vuosimalli', 'Henkilömäärä', 'Tyyppi', 'Vastuuhenkilö']
+        headerRow = ['Rekisteri', 'Merkki', 'Malli', 'Vuosimalli', 'Henkilömäärä', 'Tyyppi', 'Automaatti', 'Vastuuhenkilö']
         self.ui.vehicleCatalogTableWidget.setHorizontalHeaderLabels(headerRow)
 
         # Asetetaan taulukon solujen arvot
@@ -228,35 +221,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                 data = QtWidgets.QTableWidgetItem(str(tableData[row][column])) 
                 self.ui.vehicleCatalogTableWidget.setItem(row, column, data)
 
-
-
-    # Ryhmät-taulukon päivitys
-    def updateGroupTableWidget(self):
-        # Luetaan tietokanta-asetukset paikallisiin muuttujiin
-        dbSettings = self.currentSettings
-        plainTextPassword = self.plainTextPassword
-        dbSettings['password'] = plainTextPassword # Vaihdetaan selväkieliseksi 
-
-        # Luodaan tietokantayhteys-olio
-        dbConnection = dbOperations.DbConnection(dbSettings)
-
-        # Tehdään lista ryhmä taulun tiedoista
-        tableData = dbConnection.readAllColumnsFromTable('ryhma')
-
-        # Tyhjenetään vanhat tiedot käyttöliitymästä ennen uusien lukemista
-        self.ui.savedGroupsTableWidget.clearContents()
-
-        # Määritellään taulukkoelementin otsikot
-        headerRow = ['Ryhmä', 'Vastuuhenkilö']
-        self.ui.savedGroupsTableWidget.setHorizontalHeaderLabels(headerRow)
-
-        # Asetetaan taulukon solujen arvot
-        for row in range(len(tableData)): # Luetaan listaa riveittäin
-            for column in range(len(tableData[row])): # Luetaan monikkoa sarakkeittain
-                
-                # Muutetaan merkkijonoksi ja QTableWidgetItem-olioksi
-                data = QtWidgets.QTableWidgetItem(str(tableData[row][column])) 
-                self.ui.savedGroupsTableWidget.setItem(row, column, data)
 
     # Päivitetään ajopäiväkirjan taulukko
     def updateDiaryTableWidget(self):
@@ -275,7 +239,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.diaryTableWidget.clearContents()
 
         # Määritellään taulukkoelementin otsikot
-        headerRow = ['Rekisteri', 'Merkki', 'HeTu', 'Sukunimi', 'Etunimi', 'Ryhmä', 'Otettu', 'Palautettu']
+        headerRow = ['Rekisteri', 'Merkki', 'HeTu', 'Sukunimi', 'Etunimi', 'Otettu', 'Palautettu']
         self.ui.diaryTableWidget.setHorizontalHeaderLabels(headerRow)
 
         # Asetetaan taulukon solujen arvot
@@ -292,29 +256,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     # Painikkeiden slotit
     # -------------------
 
-    # Ryhmän tallennus
-    def saveGroup(self):
-        # Määritellään tietokanta-asetukset
-        dbSettings = self.currentSettings
-        plainTextPassword = self.plainTextPassword
-        dbSettings['password'] = plainTextPassword
-
-        # Määritellään tallennusmetodin vaatimat parametrit
-        tableName = 'ryhma'
-        group = self.ui.groupNameLineEdit.text()
-        responsiblePerson = self.ui.responsiblePLineEdit.text()
-        groupDictionary = {'ryhma': group,
-                           'vastuuhenkilo': responsiblePerson}
-        
-        # Luodaan tietokantayhteys-olio
-        dbConnection = dbOperations.DbConnection(dbSettings)
-
-        # Kutsutaan tallennusmetodia
-        try:
-            dbConnection.addToTable(tableName, groupDictionary)
-            self.refreshUi()
-        except Exception as e:
-            self.openWarning('Tallennus ei onnistunut', str(e))
 
     # Lainaajan tallennus
     def savePerson(self):
@@ -329,15 +270,15 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         email = self.ui.emailLineEdit.text()
         firstName = self.ui.firstNameLineEdit.text()
         lastName = self.ui.lastNameLineEdit.text()
-        # Asetetaan ryhmä tilapäisesti:
-        group = self.ui.groupComboBox.currentText() 
+        automaticBox = self.ui.manualCheckBox.isChecked()
         licenseType = self.ui.vehicleClassLineEdit.text()
         lenderDictionary = {'hetu': ssn,
-                           'sahkoposti': email,
                            'etunimi': firstName,
                            'sukunimi': lastName,
-                           'ryhma': group,
-                           'ajokorttiluokka': licenseType}
+                           'ajokorttiluokka': licenseType,
+                           'automaatti': automaticBox,
+                           'sahkoposti': email
+                           }
         
         # Luodaan tietokantayhteys-olio
         dbConnection = dbOperations.DbConnection(dbSettings)
@@ -345,7 +286,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # Kutsutaan tallennusmetodia
         try:
             dbConnection.addToTable(tableName, lenderDictionary)
-            self.updateGroupTableWidget()
         except Exception as e:
             self.openWarning('Tallennus ei onnistunut', str(e))
 
@@ -375,8 +315,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         year = self.ui.modelYearLineEdit.text()
         capacity = int(self.ui.capacityLineEdit.text())
         vehicleType = self.ui.vehicleTypeComboBox.currentText()
+        automaticGearBox = self.ui.manualCarCehckBox.isChecked()
+        print('automaattivaihteisto', automaticGearBox)
         responsiblePerson = self.ui.vehicleOwnerLineEdit.text()
-        # Määritellään tallennusmetodin vaatimat parametrit
         tableName = 'auto'
 
         vehicleDictionary = {'rekisterinumero': numberPlate,
@@ -385,6 +326,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                           'vuosimalli': year,
                           'henkilomaara': capacity,
                           'tyyppi': vehicleType,
+                          'automaatti': automaticGearBox,
                           'vastuuhenkilo': responsiblePerson}
         
         # Luodaan tietokantayhteys-olio
@@ -444,34 +386,17 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         except Exception as e:
             self.openWarning('Poisto ei onnistunut', str(e))
 
-    def deleteGroup(self):
-        # Määritellään tietokanta-asetukset
-        dbSettings = self.currentSettings
-        plainTextPassword = self.plainTextPassword
-        dbSettings['password'] = plainTextPassword
-        # Luodaan tietokantayhteys-olio
-    
-        dbConnection = dbOperations.DbConnection(dbSettings)
-
-        # Kutsutaan tallennusmetodia
-
-        try:
-            dbConnection.deleteRowsFromTable('ryhma', 'ryhma', f"'{self.groupToDelete}'")
-            self.refreshUi()
-        except Exception as e:
-            self.openWarning('Poisto ei onnistunut', str(e))
-
     # Taulukoiden soluvalinnat
     # ------------------------
 
     def setRegisterNumber(self):
         rowIndex = 0
-        columnIdex = 0
+        columnIndex = 0
         cellValue = ''
 
         # Haetaan aktiivisen rivin numero ja ensimäisen sarakeen arvo siltä riviltä
         rowIndex = self.ui.vehicleCatalogTableWidget.currentRow()
-        cellValue = self.ui.vehicleCatalogTableWidget.item(rowIndex, columnIdex).text()
+        cellValue = self.ui.vehicleCatalogTableWidget.item(rowIndex, columnIndex).text()
         self.vehicleToDelete = cellValue
         self.ui.statusbar.showMessage(f'Valitun auton rekisterinumero on {cellValue}')
         self.ui.deleteVehiclePusButton.setEnabled(True)
@@ -488,17 +413,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.statusbar.showMessage(f'valitun käyttäjän henkilötunnus on {cellValue}')
         self.ui.deletePersonPushButton.setEnabled(True)
 
-    def setGroup(self):
-        rowIndex = 0
-        columnIndex = 0
-        cellValue = ''
-
-        # Haetaan aktiivisen solun rivinumero ja ensimmäisen sarakkeen arvo siltä riviltä
-        rowIndex = self.ui.savedGroupsTableWidget.currentRow()
-        cellValue = self.ui.savedGroupsTableWidget.item(rowIndex, columnIndex).text()
-        self.groupToDelete = cellValue
-        self.ui.statusbar.showMessage(f'valitun ryhmän nimi on {cellValue}')
-        self.ui.deleteGroupPushButton.setEnabled(True)
 
 
 
