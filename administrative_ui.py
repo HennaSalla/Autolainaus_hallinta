@@ -79,12 +79,6 @@ class Ui_MainWindow(object):
 
         self.studentInputsVerticalLayout.addWidget(self.ssnLineEdit)
 
-        self.emailLineEdit = QLineEdit(self.layoutWidget)
-        self.emailLineEdit.setObjectName(u"emailLineEdit")
-        self.emailLineEdit.setFont(font1)
-
-        self.studentInputsVerticalLayout.addWidget(self.emailLineEdit)
-
         self.firstNameLineEdit = QLineEdit(self.layoutWidget)
         self.firstNameLineEdit.setObjectName(u"firstNameLineEdit")
         self.firstNameLineEdit.setFont(font1)
@@ -108,6 +102,12 @@ class Ui_MainWindow(object):
 
         self.studentInputsVerticalLayout.addWidget(self.manualCheckBox)
 
+        self.emailLineEdit = QLineEdit(self.layoutWidget)
+        self.emailLineEdit.setObjectName(u"emailLineEdit")
+        self.emailLineEdit.setFont(font1)
+
+        self.studentInputsVerticalLayout.addWidget(self.emailLineEdit)
+
         self.layoutWidget1 = QWidget(self.lenderTab)
         self.layoutWidget1.setObjectName(u"layoutWidget1")
         self.layoutWidget1.setGeometry(QRect(20, 10, 101, 191))
@@ -121,12 +121,6 @@ class Ui_MainWindow(object):
         self.ssnLabel.setFont(font2)
 
         self.studentLabelsVerticalLayout.addWidget(self.ssnLabel)
-
-        self.emailLabel = QLabel(self.layoutWidget1)
-        self.emailLabel.setObjectName(u"emailLabel")
-        self.emailLabel.setFont(font2)
-
-        self.studentLabelsVerticalLayout.addWidget(self.emailLabel)
 
         self.firstNameLabel = QLabel(self.layoutWidget1)
         self.firstNameLabel.setObjectName(u"firstNameLabel")
@@ -151,6 +145,12 @@ class Ui_MainWindow(object):
         self.manualLabel.setFont(font2)
 
         self.studentLabelsVerticalLayout.addWidget(self.manualLabel)
+
+        self.emailLabel = QLabel(self.layoutWidget1)
+        self.emailLabel.setObjectName(u"emailLabel")
+        self.emailLabel.setFont(font2)
+
+        self.studentLabelsVerticalLayout.addWidget(self.emailLabel)
 
         self.deletePersonPushButton = QPushButton(self.lenderTab)
         self.deletePersonPushButton.setObjectName(u"deletePersonPushButton")
@@ -358,12 +358,12 @@ class Ui_MainWindow(object):
         self.endingDateEdit.setFont(font1)
         self.endingDateEdit.setCalendarPopup(True)
         self.endingDateEdit.setDate(QDate(2025, 1, 1))
-        self.chorceReportPushButton = QPushButton(self.reportsTab)
-        self.chorceReportPushButton.setObjectName(u"chorceReportPushButton")
-        self.chorceReportPushButton.setGeometry(QRect(550, 80, 61, 23))
-        self.chorceReportPushButton.setFont(font)
-        self.chorceReportPushButton.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-        self.chorceReportPushButton.setStyleSheet(u"background-color: rgb(57, 136, 220);\n"
+        self.getReportPushButton = QPushButton(self.reportsTab)
+        self.getReportPushButton.setObjectName(u"getReportPushButton")
+        self.getReportPushButton.setGeometry(QRect(550, 80, 61, 23))
+        self.getReportPushButton.setFont(font)
+        self.getReportPushButton.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+        self.getReportPushButton.setStyleSheet(u"background-color: rgb(57, 136, 220);\n"
 "color: rgb(255, 255, 255);")
         self.diaryTableWidget = QTableWidget(self.reportsTab)
         if (self.diaryTableWidget.columnCount() < 7):
@@ -429,11 +429,11 @@ class Ui_MainWindow(object):
         self.savePersonPushButton.setText(QCoreApplication.translate("MainWindow", u"Tallenna", None))
         self.manualCheckBox.setText(QCoreApplication.translate("MainWindow", u"Vain automaattiviahteet", None))
         self.ssnLabel.setText(QCoreApplication.translate("MainWindow", u"Henkil\u00f6tunnus", None))
-        self.emailLabel.setText(QCoreApplication.translate("MainWindow", u"S\u00e4hk\u00f6posti", None))
         self.firstNameLabel.setText(QCoreApplication.translate("MainWindow", u"Etunimi", None))
         self.lastNameLabel.setText(QCoreApplication.translate("MainWindow", u"Sukunimi", None))
         self.vehicleClassLabel.setText(QCoreApplication.translate("MainWindow", u"Ajokorttiluokka", None))
         self.manualLabel.setText(QCoreApplication.translate("MainWindow", u"Automaatti", None))
+        self.emailLabel.setText(QCoreApplication.translate("MainWindow", u"S\u00e4hk\u00f6posti", None))
         self.deletePersonPushButton.setText(QCoreApplication.translate("MainWindow", u"Poista", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.lenderTab), QCoreApplication.translate("MainWindow", u"Lainaajat", None))
         self.numberPlateLabel.setText(QCoreApplication.translate("MainWindow", u"Rekisterinumero", None))
@@ -455,7 +455,7 @@ class Ui_MainWindow(object):
         self.reportTypeLabel.setText(QCoreApplication.translate("MainWindow", u"Raportti", None))
         self.beginingLabel.setText(QCoreApplication.translate("MainWindow", u"Alkaa", None))
         self.endingLabel.setText(QCoreApplication.translate("MainWindow", u"P\u00e4\u00e4ttyy", None))
-        self.chorceReportPushButton.setText(QCoreApplication.translate("MainWindow", u"Hae", None))
+        self.getReportPushButton.setText(QCoreApplication.translate("MainWindow", u"Hae", None))
         self.previewLabel.setText(QCoreApplication.translate("MainWindow", u"Esikatselu", None))
         self.ssnFilterLabel.setText(QCoreApplication.translate("MainWindow", u"Hetu", None))
         self.registerFilterLabel.setText(QCoreApplication.translate("MainWindow", u"Rekisterinumero", None))
