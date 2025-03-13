@@ -131,6 +131,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.updateLenderTableWidget() # Lainaajien tiedot
         self.updateVehicleTableWidget() # Autojen tiedot
         self.updateDiaryTableWidget() # Ajopäiväkirja
+        self.ui.diaryTableWidget.clear() # Tyhjentää ajopäiväkirjan
         self.ui.deleteVehiclePusButton.setEnabled(False) # Otetaan auton poisto-painike pois käytöstä
         self.ui.deletePersonPushButton.setEnabled(False) # Lainaajan poisto-painike pois käytöstä
         self.ui.endingDateEdit.setDate(self.today)
