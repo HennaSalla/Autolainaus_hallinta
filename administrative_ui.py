@@ -27,7 +27,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(839, 819)
+        MainWindow.resize(839, 684)
         icon = QIcon(QIcon.fromTheme(u"preferences-desktop-accessibility"))
         MainWindow.setWindowIcon(icon)
         self.actionMuokkaa = QAction(MainWindow)
@@ -408,7 +408,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.tabWidget.setCurrentIndex(1)
+        self.tabWidget.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(MainWindow)

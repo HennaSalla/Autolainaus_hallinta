@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>839</width>
-    <height>819</height>
+    <height>684</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -30,7 +30,7 @@
      <cursorShape>PointingHandCursor</cursorShape>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="lenderTab">
      <property name="cursor">
