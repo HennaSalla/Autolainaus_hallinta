@@ -70,8 +70,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.personToDelete = ''
 
         # Kuluvan päivän ja vuoden määritys
-        # TODO: tee slotti, joka päivittää nykyisen ajan
-        # TODO: tee sille signaali kun valitaan Raportti-välilehti
         self.today = QDate.currentDate()
         self.currentYear = str(self.today.toPython())[0:4]
         self.firstDayOfYear = QDate(int(self.currentYear), 1, 1)
