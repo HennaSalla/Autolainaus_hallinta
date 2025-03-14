@@ -27,7 +27,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(839, 677)
+        MainWindow.resize(839, 819)
         icon = QIcon(QIcon.fromTheme(u"preferences-desktop-accessibility"))
         MainWindow.setWindowIcon(icon)
         self.actionMuokkaa = QAction(MainWindow)
@@ -278,13 +278,6 @@ class Ui_MainWindow(object):
         self.saveVehiclePushButton.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.saveVehiclePushButton.setStyleSheet(u"background-color: rgb(57, 136, 220);\n"
 "color: rgb(255, 255, 255);")
-        self.printBarcodePushButton = QPushButton(self.vehicleTab)
-        self.printBarcodePushButton.setObjectName(u"printBarcodePushButton")
-        self.printBarcodePushButton.setGeometry(QRect(290, 10, 91, 23))
-        self.printBarcodePushButton.setFont(font)
-        self.printBarcodePushButton.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-        self.printBarcodePushButton.setStyleSheet(u"background-color: rgb(220, 162, 25);\n"
-"color: rgb(255, 255, 255);")
         self.vehicleCatalogTableWidget = QTableWidget(self.vehicleTab)
         if (self.vehicleCatalogTableWidget.columnCount() < 9):
             self.vehicleCatalogTableWidget.setColumnCount(9)
@@ -321,7 +314,7 @@ class Ui_MainWindow(object):
         self.vehiclePictureLabel.setWordWrap(False)
         self.deleteVehiclePusButton = QPushButton(self.vehicleTab)
         self.deleteVehiclePusButton.setObjectName(u"deleteVehiclePusButton")
-        self.deleteVehiclePusButton.setGeometry(QRect(290, 50, 91, 23))
+        self.deleteVehiclePusButton.setGeometry(QRect(290, 0, 91, 23))
         self.deleteVehiclePusButton.setFont(font)
         self.deleteVehiclePusButton.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.deleteVehiclePusButton.setStyleSheet(u"background-color: rgb(255, 0, 0);\n"
@@ -415,7 +408,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.tabWidget.setCurrentIndex(0)
+        self.tabWidget.setCurrentIndex(1)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -446,8 +439,10 @@ class Ui_MainWindow(object):
         self.vehicleOwnerLabel.setText(QCoreApplication.translate("MainWindow", u"Vastuuhenkil\u00f6", None))
         self.manualCarCehckBox.setText(QCoreApplication.translate("MainWindow", u"Automaattivaihteinen", None))
         self.saveVehiclePushButton.setText(QCoreApplication.translate("MainWindow", u"Tallenna", None))
-        self.printBarcodePushButton.setText(QCoreApplication.translate("MainWindow", u"Viivakoodi", None))
         self.vehicleListLabel.setText(QCoreApplication.translate("MainWindow", u"Autoluettelo", None))
+#if QT_CONFIG(tooltip)
+        self.openPicturePushButton.setToolTip(QCoreApplication.translate("MainWindow", u"Lis\u00e4\u00e4 auton kuva kuvat kansiosta", None))
+#endif // QT_CONFIG(tooltip)
         self.openPicturePushButton.setText("")
         self.vehiclePictureLabel.setText("")
         self.deleteVehiclePusButton.setText(QCoreApplication.translate("MainWindow", u"Poista", None))
