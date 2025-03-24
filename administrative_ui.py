@@ -27,7 +27,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(839, 684)
+        MainWindow.resize(880, 684)
         icon = QIcon(QIcon.fromTheme(u"preferences-desktop-accessibility"))
         MainWindow.setWindowIcon(icon)
         self.actionMuokkaa = QAction(MainWindow)
@@ -38,7 +38,7 @@ class Ui_MainWindow(object):
         self.centralwidget.setObjectName(u"centralwidget")
         self.tabWidget = QTabWidget(self.centralwidget)
         self.tabWidget.setObjectName(u"tabWidget")
-        self.tabWidget.setGeometry(QRect(0, 0, 841, 621))
+        self.tabWidget.setGeometry(QRect(0, 0, 871, 621))
         self.tabWidget.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.lenderTab = QWidget()
         self.lenderTab.setObjectName(u"lenderTab")
@@ -364,7 +364,7 @@ class Ui_MainWindow(object):
         if (self.diaryTableWidget.rowCount() < 100):
             self.diaryTableWidget.setRowCount(100)
         self.diaryTableWidget.setObjectName(u"diaryTableWidget")
-        self.diaryTableWidget.setGeometry(QRect(0, 160, 741, 321))
+        self.diaryTableWidget.setGeometry(QRect(0, 160, 871, 321))
         self.diaryTableWidget.viewport().setProperty(u"cursor", QCursor(Qt.CursorShape.ForbiddenCursor))
         self.diaryTableWidget.setRowCount(100)
         self.diaryTableWidget.setColumnCount(7)
@@ -394,7 +394,7 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(MainWindow)
         self.menubar.setObjectName(u"menubar")
-        self.menubar.setGeometry(QRect(0, 0, 839, 33))
+        self.menubar.setGeometry(QRect(0, 0, 880, 33))
         self.menuAsetukset = QMenu(self.menubar)
         self.menuAsetukset.setObjectName(u"menuAsetukset")
         MainWindow.setMenuBar(self.menubar)
@@ -408,7 +408,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.tabWidget.setCurrentIndex(0)
+        self.tabWidget.setCurrentIndex(2)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
