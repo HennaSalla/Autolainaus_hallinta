@@ -27,7 +27,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(880, 684)
+        MainWindow.resize(939, 684)
         icon = QIcon(QIcon.fromTheme(u"preferences-desktop-accessibility"))
         MainWindow.setWindowIcon(icon)
         self.actionMuokkaa = QAction(MainWindow)
@@ -38,8 +38,9 @@ class Ui_MainWindow(object):
         self.centralwidget.setObjectName(u"centralwidget")
         self.tabWidget = QTabWidget(self.centralwidget)
         self.tabWidget.setObjectName(u"tabWidget")
-        self.tabWidget.setGeometry(QRect(0, 0, 871, 621))
+        self.tabWidget.setGeometry(QRect(0, 10, 1011, 621))
         self.tabWidget.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+        self.tabWidget.setLocale(QLocale(QLocale.Finnish, QLocale.Finland))
         self.lenderTab = QWidget()
         self.lenderTab.setObjectName(u"lenderTab")
         self.lenderTab.setCursor(QCursor(Qt.CursorShape.ArrowCursor))
@@ -51,6 +52,7 @@ class Ui_MainWindow(object):
         self.registeredPersonsTableWidget.setObjectName(u"registeredPersonsTableWidget")
         self.registeredPersonsTableWidget.setGeometry(QRect(20, 240, 641, 271))
         self.registeredPersonsTableWidget.viewport().setProperty(u"cursor", QCursor(Qt.CursorShape.ArrowCursor))
+        self.registeredPersonsTableWidget.setLocale(QLocale(QLocale.Finnish, QLocale.Finland))
         self.registeredPersonsTableWidget.setRowCount(10)
         self.registeredPersonsTableWidget.setColumnCount(6)
         self.registeredPersonsLabel = QLabel(self.lenderTab)
@@ -58,16 +60,17 @@ class Ui_MainWindow(object):
         self.registeredPersonsLabel.setGeometry(QRect(20, 220, 131, 16))
         self.savePersonPushButton = QPushButton(self.lenderTab)
         self.savePersonPushButton.setObjectName(u"savePersonPushButton")
-        self.savePersonPushButton.setGeometry(QRect(310, 175, 71, 23))
+        self.savePersonPushButton.setGeometry(QRect(310, 183, 71, 23))
         font = QFont()
         font.setBold(True)
         self.savePersonPushButton.setFont(font)
         self.savePersonPushButton.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.savePersonPushButton.setStyleSheet(u"background-color: rgb(57, 136, 220);\n"
 "color: rgb(255, 255, 255);")
+        self.savePersonPushButton.setLocale(QLocale(QLocale.Finnish, QLocale.Finland))
         self.layoutWidget = QWidget(self.lenderTab)
         self.layoutWidget.setObjectName(u"layoutWidget")
-        self.layoutWidget.setGeometry(QRect(130, 10, 171, 188))
+        self.layoutWidget.setGeometry(QRect(130, 10, 171, 201))
         self.studentInputsVerticalLayout = QVBoxLayout(self.layoutWidget)
         self.studentInputsVerticalLayout.setObjectName(u"studentInputsVerticalLayout")
         self.studentInputsVerticalLayout.setContentsMargins(0, 0, 0, 0)
@@ -76,41 +79,52 @@ class Ui_MainWindow(object):
         font1 = QFont()
         font1.setPointSize(11)
         self.ssnLineEdit.setFont(font1)
+        self.ssnLineEdit.setLocale(QLocale(QLocale.Finnish, QLocale.Finland))
+        self.ssnLineEdit.setClearButtonEnabled(True)
 
         self.studentInputsVerticalLayout.addWidget(self.ssnLineEdit)
 
         self.firstNameLineEdit = QLineEdit(self.layoutWidget)
         self.firstNameLineEdit.setObjectName(u"firstNameLineEdit")
         self.firstNameLineEdit.setFont(font1)
+        self.firstNameLineEdit.setLocale(QLocale(QLocale.Finnish, QLocale.Finland))
+        self.firstNameLineEdit.setClearButtonEnabled(True)
 
         self.studentInputsVerticalLayout.addWidget(self.firstNameLineEdit)
 
         self.lastNameLineEdit = QLineEdit(self.layoutWidget)
         self.lastNameLineEdit.setObjectName(u"lastNameLineEdit")
         self.lastNameLineEdit.setFont(font1)
+        self.lastNameLineEdit.setLocale(QLocale(QLocale.Finnish, QLocale.Finland))
+        self.lastNameLineEdit.setClearButtonEnabled(True)
 
         self.studentInputsVerticalLayout.addWidget(self.lastNameLineEdit)
 
         self.vehicleClassLineEdit = QLineEdit(self.layoutWidget)
         self.vehicleClassLineEdit.setObjectName(u"vehicleClassLineEdit")
         self.vehicleClassLineEdit.setFont(font1)
+        self.vehicleClassLineEdit.setLocale(QLocale(QLocale.Finnish, QLocale.Finland))
+        self.vehicleClassLineEdit.setClearButtonEnabled(True)
 
         self.studentInputsVerticalLayout.addWidget(self.vehicleClassLineEdit)
 
         self.manualCheckBox = QCheckBox(self.layoutWidget)
         self.manualCheckBox.setObjectName(u"manualCheckBox")
+        self.manualCheckBox.setLocale(QLocale(QLocale.Finnish, QLocale.Finland))
 
         self.studentInputsVerticalLayout.addWidget(self.manualCheckBox)
 
         self.emailLineEdit = QLineEdit(self.layoutWidget)
         self.emailLineEdit.setObjectName(u"emailLineEdit")
         self.emailLineEdit.setFont(font1)
+        self.emailLineEdit.setLocale(QLocale(QLocale.Finnish, QLocale.Finland))
+        self.emailLineEdit.setClearButtonEnabled(True)
 
         self.studentInputsVerticalLayout.addWidget(self.emailLineEdit)
 
         self.layoutWidget1 = QWidget(self.lenderTab)
         self.layoutWidget1.setObjectName(u"layoutWidget1")
-        self.layoutWidget1.setGeometry(QRect(20, 10, 101, 191))
+        self.layoutWidget1.setGeometry(QRect(20, 10, 101, 201))
         self.studentLabelsVerticalLayout = QVBoxLayout(self.layoutWidget1)
         self.studentLabelsVerticalLayout.setObjectName(u"studentLabelsVerticalLayout")
         self.studentLabelsVerticalLayout.setContentsMargins(0, 0, 0, 0)
@@ -119,46 +133,53 @@ class Ui_MainWindow(object):
         font2 = QFont()
         font2.setPointSize(10)
         self.ssnLabel.setFont(font2)
+        self.ssnLabel.setLocale(QLocale(QLocale.Finnish, QLocale.Finland))
 
         self.studentLabelsVerticalLayout.addWidget(self.ssnLabel)
 
         self.firstNameLabel = QLabel(self.layoutWidget1)
         self.firstNameLabel.setObjectName(u"firstNameLabel")
         self.firstNameLabel.setFont(font2)
+        self.firstNameLabel.setLocale(QLocale(QLocale.Finnish, QLocale.Finland))
 
         self.studentLabelsVerticalLayout.addWidget(self.firstNameLabel)
 
         self.lastNameLabel = QLabel(self.layoutWidget1)
         self.lastNameLabel.setObjectName(u"lastNameLabel")
         self.lastNameLabel.setFont(font2)
+        self.lastNameLabel.setLocale(QLocale(QLocale.Finnish, QLocale.Finland))
 
         self.studentLabelsVerticalLayout.addWidget(self.lastNameLabel)
 
         self.vehicleClassLabel = QLabel(self.layoutWidget1)
         self.vehicleClassLabel.setObjectName(u"vehicleClassLabel")
         self.vehicleClassLabel.setFont(font2)
+        self.vehicleClassLabel.setLocale(QLocale(QLocale.Finnish, QLocale.Finland))
 
         self.studentLabelsVerticalLayout.addWidget(self.vehicleClassLabel)
 
         self.manualLabel = QLabel(self.layoutWidget1)
         self.manualLabel.setObjectName(u"manualLabel")
         self.manualLabel.setFont(font2)
+        self.manualLabel.setLocale(QLocale(QLocale.Finnish, QLocale.Finland))
 
         self.studentLabelsVerticalLayout.addWidget(self.manualLabel)
 
         self.emailLabel = QLabel(self.layoutWidget1)
         self.emailLabel.setObjectName(u"emailLabel")
         self.emailLabel.setFont(font2)
+        self.emailLabel.setLocale(QLocale(QLocale.Finnish, QLocale.Finland))
 
         self.studentLabelsVerticalLayout.addWidget(self.emailLabel)
 
         self.deletePersonPushButton = QPushButton(self.lenderTab)
         self.deletePersonPushButton.setObjectName(u"deletePersonPushButton")
-        self.deletePersonPushButton.setGeometry(QRect(310, 140, 71, 23))
+        self.deletePersonPushButton.setGeometry(QRect(400, 183, 71, 23))
         self.deletePersonPushButton.setFont(font)
         self.deletePersonPushButton.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.deletePersonPushButton.setStyleSheet(u"background-color: rgb(255, 0, 0);\n"
 "color: rgb(255, 255, 255);")
+        self.deletePersonPushButton.setLocale(QLocale(QLocale.Finnish, QLocale.Finland))
         self.tabWidget.addTab(self.lenderTab, "")
         self.vehicleTab = QWidget()
         self.vehicleTab.setObjectName(u"vehicleTab")
@@ -172,45 +193,53 @@ class Ui_MainWindow(object):
         self.numberPlateLabel = QLabel(self.layoutWidget2)
         self.numberPlateLabel.setObjectName(u"numberPlateLabel")
         self.numberPlateLabel.setFont(font2)
+        self.numberPlateLabel.setLocale(QLocale(QLocale.Finnish, QLocale.Finland))
 
         self.vehicleLabelsVerticalLayout.addWidget(self.numberPlateLabel)
 
         self.manufacturerLabel = QLabel(self.layoutWidget2)
         self.manufacturerLabel.setObjectName(u"manufacturerLabel")
         self.manufacturerLabel.setFont(font2)
+        self.manufacturerLabel.setLocale(QLocale(QLocale.Finnish, QLocale.Finland))
 
         self.vehicleLabelsVerticalLayout.addWidget(self.manufacturerLabel)
 
         self.modelLabel = QLabel(self.layoutWidget2)
         self.modelLabel.setObjectName(u"modelLabel")
         self.modelLabel.setFont(font2)
+        self.modelLabel.setLocale(QLocale(QLocale.Finnish, QLocale.Finland))
 
         self.vehicleLabelsVerticalLayout.addWidget(self.modelLabel)
 
         self.modelYearLabel = QLabel(self.layoutWidget2)
         self.modelYearLabel.setObjectName(u"modelYearLabel")
         self.modelYearLabel.setFont(font2)
+        self.modelYearLabel.setLocale(QLocale(QLocale.Finnish, QLocale.Finland))
 
         self.vehicleLabelsVerticalLayout.addWidget(self.modelYearLabel)
 
         self.capacityLabel = QLabel(self.layoutWidget2)
         self.capacityLabel.setObjectName(u"capacityLabel")
         self.capacityLabel.setFont(font2)
+        self.capacityLabel.setLocale(QLocale(QLocale.Finnish, QLocale.Finland))
 
         self.vehicleLabelsVerticalLayout.addWidget(self.capacityLabel)
 
         self.vehicleTypeLabel = QLabel(self.layoutWidget2)
         self.vehicleTypeLabel.setObjectName(u"vehicleTypeLabel")
+        self.vehicleTypeLabel.setLocale(QLocale(QLocale.Finnish, QLocale.Finland))
 
         self.vehicleLabelsVerticalLayout.addWidget(self.vehicleTypeLabel)
 
         self.manualCarLabel = QLabel(self.layoutWidget2)
         self.manualCarLabel.setObjectName(u"manualCarLabel")
+        self.manualCarLabel.setLocale(QLocale(QLocale.Finnish, QLocale.Finland))
 
         self.vehicleLabelsVerticalLayout.addWidget(self.manualCarLabel)
 
         self.vehicleOwnerLabel = QLabel(self.layoutWidget2)
         self.vehicleOwnerLabel.setObjectName(u"vehicleOwnerLabel")
+        self.vehicleOwnerLabel.setLocale(QLocale(QLocale.Finnish, QLocale.Finland))
 
         self.vehicleLabelsVerticalLayout.addWidget(self.vehicleOwnerLabel)
 
@@ -273,23 +302,23 @@ class Ui_MainWindow(object):
 
         self.saveVehiclePushButton = QPushButton(self.vehicleTab)
         self.saveVehiclePushButton.setObjectName(u"saveVehiclePushButton")
-        self.saveVehiclePushButton.setGeometry(QRect(290, 210, 91, 23))
+        self.saveVehiclePushButton.setGeometry(QRect(310, 217, 91, 23))
         self.saveVehiclePushButton.setFont(font)
         self.saveVehiclePushButton.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.saveVehiclePushButton.setStyleSheet(u"background-color: rgb(57, 136, 220);\n"
 "color: rgb(255, 255, 255);")
         self.vehicleCatalogTableWidget = QTableWidget(self.vehicleTab)
-        if (self.vehicleCatalogTableWidget.columnCount() < 9):
-            self.vehicleCatalogTableWidget.setColumnCount(9)
-        if (self.vehicleCatalogTableWidget.rowCount() < 20):
-            self.vehicleCatalogTableWidget.setRowCount(20)
+        if (self.vehicleCatalogTableWidget.columnCount() < 10):
+            self.vehicleCatalogTableWidget.setColumnCount(10)
+        if (self.vehicleCatalogTableWidget.rowCount() < 99):
+            self.vehicleCatalogTableWidget.setRowCount(99)
         self.vehicleCatalogTableWidget.setObjectName(u"vehicleCatalogTableWidget")
-        self.vehicleCatalogTableWidget.setGeometry(QRect(0, 270, 831, 321))
+        self.vehicleCatalogTableWidget.setGeometry(QRect(0, 270, 931, 321))
         self.vehicleCatalogTableWidget.viewport().setProperty(u"cursor", QCursor(Qt.CursorShape.ArrowCursor))
         self.vehicleCatalogTableWidget.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAsNeeded)
         self.vehicleCatalogTableWidget.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
-        self.vehicleCatalogTableWidget.setRowCount(20)
-        self.vehicleCatalogTableWidget.setColumnCount(9)
+        self.vehicleCatalogTableWidget.setRowCount(99)
+        self.vehicleCatalogTableWidget.setColumnCount(10)
         self.vehicleCatalogTableWidget.horizontalHeader().setMinimumSectionSize(34)
         self.vehicleCatalogTableWidget.horizontalHeader().setProperty(u"showSortIndicator", False)
         self.vehicleCatalogTableWidget.verticalHeader().setProperty(u"showSortIndicator", False)
@@ -298,7 +327,7 @@ class Ui_MainWindow(object):
         self.vehicleListLabel.setGeometry(QRect(0, 250, 101, 16))
         self.openPicturePushButton = QPushButton(self.vehicleTab)
         self.openPicturePushButton.setObjectName(u"openPicturePushButton")
-        self.openPicturePushButton.setGeometry(QRect(290, 90, 91, 61))
+        self.openPicturePushButton.setGeometry(QRect(310, 90, 91, 61))
         self.openPicturePushButton.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.openPicturePushButton.setStyleSheet(u"background-color: rgb(85, 170, 127);")
         icon1 = QIcon(QIcon.fromTheme(u"camera-photo"))
@@ -306,18 +335,25 @@ class Ui_MainWindow(object):
         self.openPicturePushButton.setIconSize(QSize(24, 24))
         self.vehiclePictureLabel = QLabel(self.vehicleTab)
         self.vehiclePictureLabel.setObjectName(u"vehiclePictureLabel")
-        self.vehiclePictureLabel.setGeometry(QRect(420, 10, 331, 221))
+        self.vehiclePictureLabel.setGeometry(QRect(600, 20, 331, 221))
         self.vehiclePictureLabel.setFrameShape(QFrame.Shape.NoFrame)
         self.vehiclePictureLabel.setPixmap(QPixmap(u"../Autolainaus_Asiakas/uiPictrues/noPicture.png"))
         self.vehiclePictureLabel.setScaledContents(True)
         self.vehiclePictureLabel.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.vehiclePictureLabel.setWordWrap(False)
-        self.deleteVehiclePusButton = QPushButton(self.vehicleTab)
-        self.deleteVehiclePusButton.setObjectName(u"deleteVehiclePusButton")
-        self.deleteVehiclePusButton.setGeometry(QRect(290, 0, 91, 23))
-        self.deleteVehiclePusButton.setFont(font)
-        self.deleteVehiclePusButton.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-        self.deleteVehiclePusButton.setStyleSheet(u"background-color: rgb(255, 0, 0);\n"
+        self.deleteVehiclePushButton = QPushButton(self.vehicleTab)
+        self.deleteVehiclePushButton.setObjectName(u"deleteVehiclePushButton")
+        self.deleteVehiclePushButton.setGeometry(QRect(500, 217, 91, 23))
+        self.deleteVehiclePushButton.setFont(font)
+        self.deleteVehiclePushButton.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+        self.deleteVehiclePushButton.setStyleSheet(u"background-color: rgb(255, 0, 0);\n"
+"color: rgb(255, 255, 255);")
+        self.notUsableVehiclePushButton = QPushButton(self.vehicleTab)
+        self.notUsableVehiclePushButton.setObjectName(u"notUsableVehiclePushButton")
+        self.notUsableVehiclePushButton.setGeometry(QRect(405, 217, 91, 23))
+        self.notUsableVehiclePushButton.setFont(font)
+        self.notUsableVehiclePushButton.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+        self.notUsableVehiclePushButton.setStyleSheet(u"background-color: rgb(255, 170, 0);\n"
 "color: rgb(255, 255, 255);")
         self.tabWidget.addTab(self.vehicleTab, "")
         self.reportsTab = QWidget()
@@ -335,6 +371,7 @@ class Ui_MainWindow(object):
         self.beginingDateEdit.setObjectName(u"beginingDateEdit")
         self.beginingDateEdit.setGeometry(QRect(20, 80, 110, 22))
         self.beginingDateEdit.setFont(font1)
+        self.beginingDateEdit.setLocale(QLocale(QLocale.Finnish, QLocale.Finland))
         self.beginingDateEdit.setCalendarPopup(True)
         self.beginingDateEdit.setDate(QDate(2025, 1, 1))
         self.beginingLabel = QLabel(self.reportsTab)
@@ -349,25 +386,26 @@ class Ui_MainWindow(object):
         self.endingDateEdit.setObjectName(u"endingDateEdit")
         self.endingDateEdit.setGeometry(QRect(140, 80, 110, 22))
         self.endingDateEdit.setFont(font1)
+        self.endingDateEdit.setLocale(QLocale(QLocale.Finnish, QLocale.Finland))
         self.endingDateEdit.setCalendarPopup(True)
         self.endingDateEdit.setDate(QDate(2025, 1, 1))
         self.getReportPushButton = QPushButton(self.reportsTab)
         self.getReportPushButton.setObjectName(u"getReportPushButton")
-        self.getReportPushButton.setGeometry(QRect(550, 80, 61, 23))
+        self.getReportPushButton.setGeometry(QRect(700, 80, 61, 23))
         self.getReportPushButton.setFont(font)
         self.getReportPushButton.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.getReportPushButton.setStyleSheet(u"background-color: rgb(57, 136, 220);\n"
 "color: rgb(255, 255, 255);")
         self.diaryTableWidget = QTableWidget(self.reportsTab)
-        if (self.diaryTableWidget.columnCount() < 7):
-            self.diaryTableWidget.setColumnCount(7)
+        if (self.diaryTableWidget.columnCount() < 8):
+            self.diaryTableWidget.setColumnCount(8)
         if (self.diaryTableWidget.rowCount() < 100):
             self.diaryTableWidget.setRowCount(100)
         self.diaryTableWidget.setObjectName(u"diaryTableWidget")
         self.diaryTableWidget.setGeometry(QRect(0, 160, 871, 321))
         self.diaryTableWidget.viewport().setProperty(u"cursor", QCursor(Qt.CursorShape.ForbiddenCursor))
         self.diaryTableWidget.setRowCount(100)
-        self.diaryTableWidget.setColumnCount(7)
+        self.diaryTableWidget.setColumnCount(8)
         self.previewLabel = QLabel(self.reportsTab)
         self.previewLabel.setObjectName(u"previewLabel")
         self.previewLabel.setGeometry(QRect(20, 140, 61, 16))
@@ -385,16 +423,22 @@ class Ui_MainWindow(object):
         self.registerFilterLabel.setGeometry(QRect(420, 60, 91, 16))
         self.printBarcodePushButton_2 = QPushButton(self.reportsTab)
         self.printBarcodePushButton_2.setObjectName(u"printBarcodePushButton_2")
-        self.printBarcodePushButton_2.setGeometry(QRect(620, 80, 91, 23))
+        self.printBarcodePushButton_2.setGeometry(QRect(770, 80, 91, 23))
         self.printBarcodePushButton_2.setFont(font)
         self.printBarcodePushButton_2.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.printBarcodePushButton_2.setStyleSheet(u"background-color: rgb(220, 162, 25);\n"
 "color: rgb(255, 255, 255);")
+        self.reasonFilterLineEdit = QLineEdit(self.reportsTab)
+        self.reasonFilterLineEdit.setObjectName(u"reasonFilterLineEdit")
+        self.reasonFilterLineEdit.setGeometry(QRect(560, 80, 113, 22))
+        self.reasonFilterLabel = QLabel(self.reportsTab)
+        self.reasonFilterLabel.setObjectName(u"reasonFilterLabel")
+        self.reasonFilterLabel.setGeometry(QRect(560, 60, 91, 16))
         self.tabWidget.addTab(self.reportsTab, "")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(MainWindow)
         self.menubar.setObjectName(u"menubar")
-        self.menubar.setGeometry(QRect(0, 0, 880, 33))
+        self.menubar.setGeometry(QRect(0, 0, 939, 33))
         self.menuAsetukset = QMenu(self.menubar)
         self.menuAsetukset.setObjectName(u"menuAsetukset")
         MainWindow.setMenuBar(self.menubar)
@@ -408,7 +452,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.tabWidget.setCurrentIndex(2)
+        self.tabWidget.setCurrentIndex(1)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -445,7 +489,8 @@ class Ui_MainWindow(object):
 #endif // QT_CONFIG(tooltip)
         self.openPicturePushButton.setText("")
         self.vehiclePictureLabel.setText("")
-        self.deleteVehiclePusButton.setText(QCoreApplication.translate("MainWindow", u"Poista", None))
+        self.deleteVehiclePushButton.setText(QCoreApplication.translate("MainWindow", u"Poista", None))
+        self.notUsableVehiclePushButton.setText(QCoreApplication.translate("MainWindow", u"Ei lainattavissa", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.vehicleTab), QCoreApplication.translate("MainWindow", u"Autot", None))
         self.reportTypeLabel.setText(QCoreApplication.translate("MainWindow", u"Raportti", None))
         self.beginingLabel.setText(QCoreApplication.translate("MainWindow", u"Alkaa", None))
@@ -455,6 +500,7 @@ class Ui_MainWindow(object):
         self.ssnFilterLabel.setText(QCoreApplication.translate("MainWindow", u"Hetu", None))
         self.registerFilterLabel.setText(QCoreApplication.translate("MainWindow", u"Rekisterinumero", None))
         self.printBarcodePushButton_2.setText(QCoreApplication.translate("MainWindow", u"Tulosta", None))
+        self.reasonFilterLabel.setText(QCoreApplication.translate("MainWindow", u"Tarkoitus", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.reportsTab), QCoreApplication.translate("MainWindow", u"Raportit", None))
         self.menuAsetukset.setTitle(QCoreApplication.translate("MainWindow", u"Asetukset", None))
     # retranslateUi

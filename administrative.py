@@ -90,9 +90,14 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.savePersonPushButton.clicked.connect(self.savePerson)
         self.ui.saveVehiclePushButton.clicked.connect(self.saveVehicle)
         self.ui.openPicturePushButton.clicked.connect(self.openPicture)
-        self.ui.deleteVehiclePusButton.clicked.connect(self.deleteVehicle)
+        self.ui.deleteVehiclePushButton.clicked.connect(self.deleteVehicle)
         self.ui.deletePersonPushButton.clicked.connect(self.deletePerson)
         self.ui.getReportPushButton.clicked.connect(self.updateDiaryTableWidget) #Ajopäiväkirjojen haku
+        self.ui.notUsableVehiclePushButton.clicked.connect(self.setNotLendable)
+
+        # Painikeidden aktivoinnit syöttökentistä poistuttaessa
+        self.ui.capacityLineEdit.textEdited.connect(self.ui.saveVehiclePushButton.setHidden(False))
+        self.ui.vehicleClassLineEdit.textEdited.connect(self.ui.savePersonPushButton.setHidden(False))
 
 
         # Taulukko soluvalinnat
@@ -130,8 +135,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.updateVehicleTableWidget() # Autojen tiedot
         self.updateDiaryTableWidget() # Ajopäiväkirja
         self.ui.diaryTableWidget.clear() # Tyhjentää ajopäiväkirjan
-        self.ui.deleteVehiclePusButton.setEnabled(False) # Otetaan auton poisto-painike pois käytöstä
-        self.ui.deletePersonPushButton.setEnabled(False) # Lainaajan poisto-painike pois käytöstä
+        self.ui.deleteVehiclePushButton.setHidden(True) # Auton poisto-painike piiloon
+        self.ui.deletePersonPushButton.setHidden(True) # Lainaajan poisto-painike piiloon
+        self.ui.notUsableVehiclePushButton.setHidden(True) # Auton ei lainattavissa-painike piiloon
         self.ui.endingDateEdit.setDate(self.today)
         self.ui.beginingDateEdit.setDate(self.firstDayOfYear)
 
@@ -218,7 +224,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.vehicleCatalogTableWidget.clearContents()
 
         # Määritellään taulukkoelementin otsikot
-        headerRow = ['Rekisteri', 'Merkki', 'Malli', 'Vuosimalli', 'Henkilömäärä', 'Tyyppi', 'Automaatti', 'Vastuuhenkilö']
+        headerRow = ['Rekisteri', 'Käytettävissä', 'Merkki', 'Malli', 'Vuosimalli', 'Henkilömäärä', 'Tyyppi', 'Automaatti', 'Vastuuhenkilö']
         self.ui.vehicleCatalogTableWidget.setHorizontalHeaderLabels(headerRow)
 
         # Asetetaan taulukon solujen arvot
@@ -319,6 +325,15 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         try:
             dbConnection.addToTable(tableName, lenderDictionary)
             self.updateLenderTableWidget()
+            self.ui.savePersonPushButton.setHidden(True) # Piilotetaan tallennus-painike
+            statusBarMessage = f'Lainaajan {self.ui.lastNameLineEdit.text()} tiedot tallenettiin'
+            self.ui.statusbar.showMessage(statusBarMessage, 5000)
+            self.ui.ssnLineEdit.clear()
+            self.ui.firstNameLineEdit.clear()
+            self.ui.lastNameLineEdit.clear()
+            self.ui.vehicleClassLineEdit.clear()
+            self.ui.manualCheckBox.setChecked(False)
+            self.ui.emailLineEdit.clear()
         except Exception as e:
             self.openWarning('Tallennus ei onnistunut', str(e)) 
 
@@ -386,6 +401,23 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         except Exception as e:
             self.openWarning('Kuvan päivitys ei onnistunut', str(e))
 
+    def setNotLendable(self):
+        #TODO: Asetetaan auto-taulun kautettavissa sarakkeen arvoksi False
+        # Määritellään tietokanta-asetukset
+        dbSettings = self.currentSettings
+        plainTextPassword = self.plainTextPassword
+        dbSettings['password'] = plainTextPassword
+        # Luodaan tietokantayhteys-olio
+    
+        dbConnection = dbOperations.DbConnection(dbSettings)
+
+        # Kutsutaan päivitysmetodia
+        try:
+            dbConnection.modifyTableData('auto', 'kaytettavissa', False, 'rekisterinumero', f"'{self.vehicleToModify}'")
+            self.refreshUi()
+        except Exception as e:
+            self.openWarning('Auton tilaa ei saatu muutettua', str(e))
+
     def deleteVehicle(self):
         # Määritellään tietokanta-asetukset
         dbSettings = self.currentSettings
@@ -395,10 +427,10 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     
         dbConnection = dbOperations.DbConnection(dbSettings)
 
-        # Kutsutaan tallennusmetodia
+        # Kutsutaan poistometodia
 
         try:
-            dbConnection.deleteRowsFromTable('auto', 'rekisterinumero', f"'{self.vehicleToDelete}'")
+            dbConnection.deleteRowsFromTable('auto', 'rekisterinumero', f"'{self.vehicleToModify}'")
             self.refreshUi()
         except Exception as e:
             self.openWarning('Poisto ei onnistunut', str(e))
@@ -412,7 +444,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     
         dbConnection = dbOperations.DbConnection(dbSettings)
 
-        # Kutsutaan tallennusmetodia
+        # Kutsutaan poistometodia
 
         try:
             dbConnection.deleteRowsFromTable('lainaaja', 'hetu', f"'{self.personToDelete}'")
@@ -432,9 +464,10 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # Haetaan aktiivisen rivin numero ja ensimäisen sarakeen arvo siltä riviltä
         rowIndex = self.ui.vehicleCatalogTableWidget.currentRow()
         cellValue = self.ui.vehicleCatalogTableWidget.item(rowIndex, columnIndex).text()
-        self.vehicleToDelete = cellValue
+        self.vehicleToModify = cellValue
         self.ui.statusbar.showMessage(f'Valitun auton rekisterinumero on {cellValue}')
-        self.ui.deleteVehiclePusButton.setEnabled(True)
+        self.ui.deleteVehiclePushButton.setHidden(False)
+        self.ui.notUsableVehiclePushButton.setHidden(False)
 
     # Asetetaan poistetttavan henkilön HeTu valitun rivin perusteella
     def setSNN(self):
@@ -447,8 +480,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         cellValue = self.ui.registeredPersonsTableWidget.item(rowIndex, columnIndex).text()
         self.personToDelete = cellValue
         self.ui.statusbar.showMessage(f'valitun käyttäjän henkilötunnus on {cellValue}')
-        self.ui.deletePersonPushButton.setEnabled(True)
-
+        self.ui.deletePersonPushButton.setHidden(False)
 
 
 
