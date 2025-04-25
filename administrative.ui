@@ -21,7 +21,7 @@
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>10</y>
+      <y>0</y>
       <width>1011</width>
       <height>621</height>
      </rect>
@@ -33,7 +33,7 @@
      <locale language="Finnish" country="Finland"/>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="lenderTab">
      <property name="cursor">
@@ -112,7 +112,8 @@
       </property>
       <property name="styleSheet">
        <string notr="true">background-color: rgb(57, 136, 220);
-color: rgb(255, 255, 255);</string>
+color: rgb(255, 255, 255);
+</string>
       </property>
       <property name="locale">
        <locale language="Finnish" country="Finland"/>
@@ -141,6 +142,9 @@ color: rgb(255, 255, 255);</string>
          <property name="locale">
           <locale language="Finnish" country="Finland"/>
          </property>
+         <property name="placeholderText">
+          <string>Pakollinen tieto</string>
+         </property>
          <property name="clearButtonEnabled">
           <bool>true</bool>
          </property>
@@ -155,6 +159,9 @@ color: rgb(255, 255, 255);</string>
          </property>
          <property name="locale">
           <locale language="Finnish" country="Finland"/>
+         </property>
+         <property name="placeholderText">
+          <string>Pakollinen tieto</string>
          </property>
          <property name="clearButtonEnabled">
           <bool>true</bool>
@@ -171,6 +178,9 @@ color: rgb(255, 255, 255);</string>
          <property name="locale">
           <locale language="Finnish" country="Finland"/>
          </property>
+         <property name="placeholderText">
+          <string>Pakollinen tieto</string>
+         </property>
          <property name="clearButtonEnabled">
           <bool>true</bool>
          </property>
@@ -186,6 +196,9 @@ color: rgb(255, 255, 255);</string>
          <property name="locale">
           <locale language="Finnish" country="Finland"/>
          </property>
+         <property name="placeholderText">
+          <string>Pakollinen tieto</string>
+         </property>
          <property name="clearButtonEnabled">
           <bool>true</bool>
          </property>
@@ -193,6 +206,9 @@ color: rgb(255, 255, 255);</string>
        </item>
        <item>
         <widget class="QCheckBox" name="manualCheckBox">
+         <property name="toolTip">
+          <string>Pakollinen tieto</string>
+         </property>
          <property name="locale">
           <locale language="Finnish" country="Finland"/>
          </property>
@@ -210,6 +226,9 @@ color: rgb(255, 255, 255);</string>
          </property>
          <property name="locale">
           <locale language="Finnish" country="Finland"/>
+         </property>
+         <property name="placeholderText">
+          <string>Valinainen tieto</string>
          </property>
          <property name="clearButtonEnabled">
           <bool>true</bool>
@@ -338,7 +357,8 @@ color: rgb(255, 255, 255);</string>
        <cursorShape>PointingHandCursor</cursorShape>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: rgb(255, 0, 0);
+       <string notr="true">
+background-color: rgb(255, 0, 0);
 color: rgb(255, 255, 255);</string>
       </property>
       <property name="locale">
@@ -479,7 +499,7 @@ color: rgb(255, 255, 255);</string>
         <x>120</x>
         <y>0</y>
         <width>169</width>
-        <height>241</height>
+        <height>242</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="vehicleInputsVerticalLayout">
@@ -489,6 +509,9 @@ color: rgb(255, 255, 255);</string>
           <font>
            <pointsize>11</pointsize>
           </font>
+         </property>
+         <property name="placeholderText">
+          <string>Pakollinen tieto</string>
          </property>
          <property name="clearButtonEnabled">
           <bool>true</bool>
@@ -502,6 +525,9 @@ color: rgb(255, 255, 255);</string>
            <pointsize>11</pointsize>
           </font>
          </property>
+         <property name="placeholderText">
+          <string>Pakollinen tieto</string>
+         </property>
          <property name="clearButtonEnabled">
           <bool>true</bool>
          </property>
@@ -513,6 +539,9 @@ color: rgb(255, 255, 255);</string>
           <font>
            <pointsize>11</pointsize>
           </font>
+         </property>
+         <property name="placeholderText">
+          <string>Pakollinen tieto</string>
          </property>
          <property name="clearButtonEnabled">
           <bool>true</bool>
@@ -526,6 +555,9 @@ color: rgb(255, 255, 255);</string>
            <pointsize>11</pointsize>
           </font>
          </property>
+         <property name="placeholderText">
+          <string>Pakollinen tieto</string>
+         </property>
          <property name="clearButtonEnabled">
           <bool>true</bool>
          </property>
@@ -538,16 +570,29 @@ color: rgb(255, 255, 255);</string>
            <pointsize>11</pointsize>
           </font>
          </property>
+         <property name="placeholderText">
+          <string>Pakollinen tieto</string>
+         </property>
          <property name="clearButtonEnabled">
           <bool>true</bool>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QComboBox" name="vehicleTypeComboBox"/>
+        <widget class="QComboBox" name="vehicleTypeComboBox">
+         <property name="toolTip">
+          <string/>
+         </property>
+         <property name="placeholderText">
+          <string>Pakollinen tieto</string>
+         </property>
+        </widget>
        </item>
        <item>
         <widget class="QCheckBox" name="manualCarCehckBox">
+         <property name="toolTip">
+          <string>Pakollinen tieto</string>
+         </property>
          <property name="text">
           <string>Automaattivaihteinen</string>
          </property>
@@ -555,6 +600,14 @@ color: rgb(255, 255, 255);</string>
        </item>
        <item>
         <widget class="QLineEdit" name="vehicleOwnerLineEdit">
+         <property name="font">
+          <font>
+           <pointsize>11</pointsize>
+          </font>
+         </property>
+         <property name="placeholderText">
+          <string>Valinainen tieto</string>
+         </property>
          <property name="clearButtonEnabled">
           <bool>true</bool>
          </property>
@@ -598,6 +651,9 @@ color: rgb(255, 255, 255);</string>
       </property>
       <property name="cursor" stdset="0">
        <cursorShape>ArrowCursor</cursorShape>
+      </property>
+      <property name="toolTip">
+       <string>Valitse auto klikaamalla solua. Tämän jälkeen auton voi poistaa tai estää sen lainaamisen.</string>
       </property>
       <property name="verticalScrollBarPolicy">
        <enum>Qt::ScrollBarPolicy::ScrollBarAsNeeded</enum>
@@ -1159,6 +1215,9 @@ color: rgb(255, 255, 255);</string>
         <height>22</height>
        </rect>
       </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Rajoittaa ajopäiväkirja tietoja henkilötunnuksen perusteella.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
      </widget>
      <widget class="QLineEdit" name="registerFilterLineEdit">
       <property name="geometry">
@@ -1168,6 +1227,9 @@ color: rgb(255, 255, 255);</string>
         <width>113</width>
         <height>22</height>
        </rect>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Rajoittaa ajopäiväkirjoja rekisterinumeron perusteella.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
      </widget>
      <widget class="QLabel" name="ssnFilterLabel">
@@ -1230,6 +1292,9 @@ color: rgb(255, 255, 255);</string>
         <height>22</height>
        </rect>
       </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Rajoittaa ajopäiväkirjoja ajon tarkoituksen perusteella.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
      </widget>
      <widget class="QLabel" name="reasonFilterLabel">
       <property name="geometry">
@@ -1243,6 +1308,274 @@ color: rgb(255, 255, 255);</string>
       <property name="text">
        <string>Tarkoitus</string>
       </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="maitinanceTab">
+     <property name="cursor">
+      <cursorShape>ArrowCursor</cursorShape>
+     </property>
+     <attribute name="title">
+      <string>Ylläpito</string>
+     </attribute>
+     <widget class="QFrame" name="frame">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>391</width>
+        <height>381</height>
+       </rect>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::Shape::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Shadow::Raised</enum>
+      </property>
+      <widget class="QTableWidget" name="vehicleTypeAddTableWidget">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>70</y>
+         <width>371</width>
+         <height>271</height>
+        </rect>
+       </property>
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Voit poistaa ajoneuvotyypin valitsemalla sen taulukosta ja painamalla Poista painiketta. Jos Tyypillä on jo ajopäiväkirja merkintöjä poistaminen ei ole mahdollista.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+       <property name="rowCount">
+        <number>10</number>
+       </property>
+       <property name="columnCount">
+        <number>1</number>
+       </property>
+       <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+        <bool>true</bool>
+       </attribute>
+       <attribute name="horizontalHeaderStretchLastSection">
+        <bool>true</bool>
+       </attribute>
+       <row/>
+       <row/>
+       <row/>
+       <row/>
+       <row/>
+       <row/>
+       <row/>
+       <row/>
+       <row/>
+       <row/>
+       <column/>
+      </widget>
+      <widget class="QLineEdit" name="vehicleTypeAddLineEdit">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>40</y>
+         <width>251</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Kirjoita kenttään lisättävä ajaneuvotyyppi ja paina Lisää painiketta. Painike tulee näkyviin kirjoitaessasi kentään.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="vehicleTypeAddPushButton">
+       <property name="geometry">
+        <rect>
+         <x>300</x>
+         <y>40</y>
+         <width>75</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(57, 136, 220);
+color: rgb(255, 255, 255);</string>
+       </property>
+       <property name="text">
+        <string>Lisää</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="vehicleTypeRemovePushButton">
+       <property name="geometry">
+        <rect>
+         <x>300</x>
+         <y>350</y>
+         <width>75</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(255, 0, 0);
+color: rgb(255, 255, 255);</string>
+       </property>
+       <property name="text">
+        <string>Poista</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="VehicleTypeAddLabel">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>91</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Ajoneuvotyypit</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QFrame" name="frame_2">
+      <property name="geometry">
+       <rect>
+        <x>420</x>
+        <y>10</y>
+        <width>391</width>
+        <height>381</height>
+       </rect>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::Shape::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Shadow::Raised</enum>
+      </property>
+      <widget class="QTableWidget" name="reasonAddTableWidget">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>70</y>
+         <width>371</width>
+         <height>271</height>
+        </rect>
+       </property>
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Voit poistaa ajon tarkoituksen valitsemalla sen taulukosta ja painamalla Poista painiketta. Jos tarkoituksella on jo ajopäiväkirja merkintöjä ei poistaminen ole mahdollista.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+       <property name="rowCount">
+        <number>10</number>
+       </property>
+       <property name="columnCount">
+        <number>1</number>
+       </property>
+       <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+        <bool>true</bool>
+       </attribute>
+       <attribute name="horizontalHeaderStretchLastSection">
+        <bool>true</bool>
+       </attribute>
+       <row/>
+       <row/>
+       <row/>
+       <row/>
+       <row/>
+       <row/>
+       <row/>
+       <row/>
+       <row/>
+       <row/>
+       <column/>
+      </widget>
+      <widget class="QLineEdit" name="reasonAddLineEdit">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>40</y>
+         <width>251</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Kirjoita kentään lisätävä ajon tarkoitus ja painaa Lisää painiketta. Painike tulee näkyviin kuin krijoitat kentään.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="reasonAddPushButton">
+       <property name="geometry">
+        <rect>
+         <x>290</x>
+         <y>40</y>
+         <width>75</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(57, 136, 220);</string>
+       </property>
+       <property name="text">
+        <string>Lisää</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="reasonRemovePushButton">
+       <property name="geometry">
+        <rect>
+         <x>310</x>
+         <y>350</y>
+         <width>75</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(255, 0, 0);</string>
+       </property>
+       <property name="text">
+        <string>Poista</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="reasonAddLabel">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>101</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Ajon tarkoitukset</string>
+       </property>
+      </widget>
      </widget>
     </widget>
    </widget>
