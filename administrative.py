@@ -880,8 +880,6 @@ class AboutDialog(QtWidgets.QDialog, About_Dialog):
         # Kutsutaan käyttöliittymän muodostusmetodia setupUi
         self.ui.setupUi(self)
     
-
-
 if __name__ == "__main__":
     
     # Luodaan sovellus ja asetetaan tyyliksi Fusion
