@@ -64,6 +64,7 @@ class Ui_MainWindow(object):
         self.savePersonPushButton.setObjectName(u"savePersonPushButton")
         self.savePersonPushButton.setGeometry(QRect(310, 183, 71, 23))
         font = QFont()
+        font.setPointSize(10)
         font.setBold(True)
         self.savePersonPushButton.setFont(font)
         self.savePersonPushButton.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
@@ -307,7 +308,7 @@ class Ui_MainWindow(object):
 
         self.saveVehiclePushButton = QPushButton(self.vehicleTab)
         self.saveVehiclePushButton.setObjectName(u"saveVehiclePushButton")
-        self.saveVehiclePushButton.setGeometry(QRect(310, 217, 91, 23))
+        self.saveVehiclePushButton.setGeometry(QRect(290, 217, 91, 23))
         self.saveVehiclePushButton.setFont(font)
         self.saveVehiclePushButton.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.saveVehiclePushButton.setStyleSheet(u"background-color: rgb(57, 136, 220);\n"
@@ -355,11 +356,18 @@ class Ui_MainWindow(object):
 "color: rgb(255, 255, 255);")
         self.notUsableVehiclePushButton = QPushButton(self.vehicleTab)
         self.notUsableVehiclePushButton.setObjectName(u"notUsableVehiclePushButton")
-        self.notUsableVehiclePushButton.setGeometry(QRect(405, 217, 91, 23))
+        self.notUsableVehiclePushButton.setGeometry(QRect(385, 217, 111, 23))
         self.notUsableVehiclePushButton.setFont(font)
         self.notUsableVehiclePushButton.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.notUsableVehiclePushButton.setStyleSheet(u"background-color: rgb(255, 170, 0);\n"
 "color: rgb(255, 255, 255);")
+        self.updatePicturePushButton = QPushButton(self.vehicleTab)
+        self.updatePicturePushButton.setObjectName(u"updatePicturePushButton")
+        self.updatePicturePushButton.setGeometry(QRect(410, 90, 91, 61))
+        self.updatePicturePushButton.setFont(font)
+        self.updatePicturePushButton.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+        self.updatePicturePushButton.setStyleSheet(u"color: rgb(255, 255, 255);\n"
+"background-color: rgb(57, 136, 220);")
         self.tabWidget.addTab(self.vehicleTab, "")
         self.reportsTab = QWidget()
         self.reportsTab.setObjectName(u"reportsTab")
@@ -465,17 +473,14 @@ class Ui_MainWindow(object):
         self.vehicleTypeAddPushButton = QPushButton(self.frame)
         self.vehicleTypeAddPushButton.setObjectName(u"vehicleTypeAddPushButton")
         self.vehicleTypeAddPushButton.setGeometry(QRect(300, 40, 75, 24))
-        font3 = QFont()
-        font3.setPointSize(10)
-        font3.setBold(True)
-        self.vehicleTypeAddPushButton.setFont(font3)
+        self.vehicleTypeAddPushButton.setFont(font)
         self.vehicleTypeAddPushButton.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.vehicleTypeAddPushButton.setStyleSheet(u"background-color: rgb(57, 136, 220);\n"
 "color: rgb(255, 255, 255);")
         self.vehicleTypeRemovePushButton = QPushButton(self.frame)
         self.vehicleTypeRemovePushButton.setObjectName(u"vehicleTypeRemovePushButton")
         self.vehicleTypeRemovePushButton.setGeometry(QRect(300, 350, 75, 24))
-        self.vehicleTypeRemovePushButton.setFont(font3)
+        self.vehicleTypeRemovePushButton.setFont(font)
         self.vehicleTypeRemovePushButton.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.vehicleTypeRemovePushButton.setStyleSheet(u"background-color: rgb(255, 0, 0);\n"
 "color: rgb(255, 255, 255);")
@@ -504,14 +509,14 @@ class Ui_MainWindow(object):
         self.reasonAddPushButton = QPushButton(self.frame_2)
         self.reasonAddPushButton.setObjectName(u"reasonAddPushButton")
         self.reasonAddPushButton.setGeometry(QRect(290, 40, 75, 24))
-        self.reasonAddPushButton.setFont(font3)
+        self.reasonAddPushButton.setFont(font)
         self.reasonAddPushButton.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.reasonAddPushButton.setStyleSheet(u"color: rgb(255, 255, 255);\n"
 "background-color: rgb(57, 136, 220);")
         self.reasonRemovePushButton = QPushButton(self.frame_2)
         self.reasonRemovePushButton.setObjectName(u"reasonRemovePushButton")
         self.reasonRemovePushButton.setGeometry(QRect(310, 350, 75, 24))
-        self.reasonRemovePushButton.setFont(font3)
+        self.reasonRemovePushButton.setFont(font)
         self.reasonRemovePushButton.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.reasonRemovePushButton.setStyleSheet(u"color: rgb(255, 255, 255);\n"
 "background-color: rgb(255, 0, 0);")
@@ -540,7 +545,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.tabWidget.setCurrentIndex(2)
+        self.tabWidget.setCurrentIndex(1)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -604,6 +609,7 @@ class Ui_MainWindow(object):
         self.vehiclePictureLabel.setText("")
         self.deleteVehiclePushButton.setText(QCoreApplication.translate("MainWindow", u"Poista", None))
         self.notUsableVehiclePushButton.setText(QCoreApplication.translate("MainWindow", u"Ei lainattavissa", None))
+        self.updatePicturePushButton.setText(QCoreApplication.translate("MainWindow", u"P\u00e4ivit\u00e4 kuva", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.vehicleTab), QCoreApplication.translate("MainWindow", u"Autot", None))
         self.reportTypeLabel.setText(QCoreApplication.translate("MainWindow", u"Raportti", None))
         self.beginingLabel.setText(QCoreApplication.translate("MainWindow", u"Alkaa", None))

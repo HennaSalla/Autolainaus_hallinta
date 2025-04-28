@@ -33,7 +33,7 @@
      <locale language="Finnish" country="Finland"/>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="lenderTab">
      <property name="cursor">
@@ -104,6 +104,7 @@
       </property>
       <property name="font">
        <font>
+        <pointsize>10</pointsize>
         <bold>true</bold>
        </font>
       </property>
@@ -350,6 +351,7 @@ color: rgb(255, 255, 255);
       </property>
       <property name="font">
        <font>
+        <pointsize>10</pointsize>
         <bold>true</bold>
        </font>
       </property>
@@ -618,7 +620,7 @@ color: rgb(255, 255, 255);</string>
      <widget class="QPushButton" name="saveVehiclePushButton">
       <property name="geometry">
        <rect>
-        <x>310</x>
+        <x>290</x>
         <y>217</y>
         <width>91</width>
         <height>23</height>
@@ -626,6 +628,7 @@ color: rgb(255, 255, 255);</string>
       </property>
       <property name="font">
        <font>
+        <pointsize>10</pointsize>
         <bold>true</bold>
        </font>
       </property>
@@ -869,6 +872,7 @@ color: rgb(255, 255, 255);</string>
       </property>
       <property name="font">
        <font>
+        <pointsize>10</pointsize>
         <bold>true</bold>
        </font>
       </property>
@@ -886,14 +890,15 @@ color: rgb(255, 255, 255);</string>
      <widget class="QPushButton" name="notUsableVehiclePushButton">
       <property name="geometry">
        <rect>
-        <x>405</x>
+        <x>385</x>
         <y>217</y>
-        <width>91</width>
+        <width>111</width>
         <height>23</height>
        </rect>
       </property>
       <property name="font">
        <font>
+        <pointsize>10</pointsize>
         <bold>true</bold>
        </font>
       </property>
@@ -906,6 +911,32 @@ color: rgb(255, 255, 255);</string>
       </property>
       <property name="text">
        <string>Ei lainattavissa</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="updatePicturePushButton">
+      <property name="geometry">
+       <rect>
+        <x>410</x>
+        <y>90</y>
+        <width>91</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(57, 136, 220);</string>
+      </property>
+      <property name="text">
+       <string>Päivitä kuva</string>
       </property>
      </widget>
     </widget>
@@ -1052,6 +1083,7 @@ color: rgb(255, 255, 255);</string>
       </property>
       <property name="font">
        <font>
+        <pointsize>10</pointsize>
         <bold>true</bold>
        </font>
       </property>
@@ -11170,6 +11202,7 @@ color: rgb(255, 255, 255);</string>
       </property>
       <property name="font">
        <font>
+        <pointsize>10</pointsize>
         <bold>true</bold>
        </font>
       </property>

@@ -102,6 +102,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.reasonRemovePushButton.clicked.connect(self.deleteReason)
         self.ui.vehicleTypeAddPushButton.clicked.connect(self.newVehicleType)
         self.ui.vehicleTypeRemovePushButton.clicked.connect(self.deleteVehicleType)
+        self.ui.updatePicturePushButton.clicked.connect(self.updatePicture)
 
         # Painikeidden aktivoinnit syöttökentistä poistuttaessa
         self.ui.capacityLineEdit.textChanged.connect(self.showSaveVehiclePB)
@@ -177,8 +178,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.reasonAddPushButton.setHidden(True) # Piilotetaan lisää painike uusista ajon sysistä
         self.ui.vehicleTypeRemovePushButton.setHidden(True) # Piilotetaan poista painike uusista ajoneuvotyypeistä
         self.ui.reasonRemovePushButton.setHidden(True) # Piilotetaan poista painike uusista ajon syistä
-        self.ui.endingDateEdit.setDate(self.today)
-        self.ui.beginingDateEdit.setDate(self.firstDayOfYear)
+        self.ui.updatePicturePushButton.setHidden(True) # Piilotetaan mukaa kuvaa painike
+        self.ui.endingDateEdit.setDate(self.today) # Ajopäiväkirjan aloitus oletus vuoden ekaksi päiväksi
+        self.ui.beginingDateEdit.setDate(self.firstDayOfYear) # Ajopäivä kirjan lopetus päiväksi meneillään oleva päivä
 
     # Välilehtien slotit
     # ------------------
@@ -454,10 +456,11 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     def showReasonAddPB(self):
         self.ui.reasonAddPushButton.setHidden(False)
 
-    # Piilotetaan ajoneuvon Poista- ja Ei käytettävissä -painikkeet  
+    # Piilotetaan ajoneuvon Poista- , Ei käytettävissä ja päivitä kuva -painikkeet
     def hideVehicleButtons(self):
         self.ui.deleteVehiclePushButton.setHidden(True)
         self.ui.notUsableVehiclePushButton.setHidden(True)
+        self.ui.updatePicturePushButton.setHidden(True)
 
     # Piilotetaan lainaajan poisto painike
     def hideDeletePersonPB(self):
@@ -566,6 +569,27 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.refreshUi()
         except Exception as e:
             self.openWarning('Kuvan päivitys ei onnistunut', str(e))
+
+    def updatePicture(self):
+        # Määritellään tietokanta-asetukset
+        dbSettings = self.currentSettings
+        plainTextPassword = self.plainTextPassword
+        dbSettings['password'] = plainTextPassword
+        # Luodaan tietokantayhteys-olio
+
+        # Luetaan kuvatiedostoa ja päivitetään autotaulua
+        with open(self.vehiclePicture, 'rb') as pictureFile:
+            pictureData = pictureFile.read()
+        
+        # Luodaan uusi yhteys, koska edellinen suljettiin
+        dbConnection = dbOperations.DbConnection(dbSettings)
+
+        # Kutsutaan päivitysmetodia
+        try:
+            dbConnection.modifyTableData('auto', 'kuva', 'rekisterinumero', f"'{self.vehicleToModify}'", pictureData)
+            self.refreshUi()
+        except Exception as e:
+            self.openWarning('Auton tilaa ei saatu muutettua', str(e))
 
     def setNotLendable(self):
         # Määritellään tietokanta-asetukset
@@ -720,6 +744,34 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.statusbar.showMessage(f'Valitun auton rekisterinumero on {cellValue}')
         self.ui.deleteVehiclePushButton.setHidden(False)
         self.ui.notUsableVehiclePushButton.setHidden(False)
+        self.ui.updatePicturePushButton.setHidden(False)
+
+        # TODO: Päivitetään kuvakentään valitun auton kuva
+
+        # Muodostetaan yhteys tietokantaan
+
+        # Kuvan näyttö
+        try:
+            #Luodaan tietokantayhteys-olio
+            dbConnection = dbOperations.DbConnection(dbSettings)
+            criteria = f"rekisterinumero = '{self.ui.keysLineEdit.text()}'"
+
+            # Haetaan auton kuva auto-taulusta
+            resultSet = dbConnection.filterColumsFromTable('auto', ['kuva'], criteria)
+            row = resultSet[0]
+            picture = row[0] # PNG tai JPG kuva tietokannasta
+
+            with open('currentCar.png', 'wb') as temporeryFile:
+                temporeryFile.write(picture)
+
+            pixmap = QPixmap('currentCar.png')
+            self.ui.carPicturesLabel.setPixmap(pixmap)
+
+        except Exception as e:
+            title = 'Auton kuvan lataaminen ei onnistunut'
+            text = 'Jos mitään tietoja ei tullut näkyviin, ota yhteys henkilökuntaan'
+            detailedText = str(e)
+            self.openWarning(title,text,detailedText)
 
     # Asetetaan poistetttavan henkilön HeTu valitun rivin perusteella
     def setSNN(self):
