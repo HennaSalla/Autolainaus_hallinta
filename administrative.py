@@ -11,8 +11,8 @@ import json # JSON-objektien ja tiedostojen käsittely
 
 # Asennuksen vaativat kirjastot
 from PySide6 import QtWidgets # Qt-vimpaimet
-from PySide6 import QtGui # Pixmap-muutoksia varten
-from PySide6.QtCore import QDate
+from PySide6 import QtGui # Pixmap-muutoksia varten ja Web sivujen näyttö
+from PySide6.QtCore import QDate, QUrl # Päivämäärät ja URL-osoitteet
 
 
 # Käyttöliittymämoduulien lataukset
@@ -83,6 +83,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # Valikkotoiminnot
         self.ui.actionMuokkaa.triggered.connect(self.openSettingsDialog)
         self.ui.actionTietoja_ohjelmasta.triggered.connect(self.openAboutDialog)
+        self.ui.actionOhjesivut.triggered.connect(self.openWebHelp)
 
         # Välilehtien vaihdon käynistämät singnaalit
 
@@ -146,9 +147,12 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         
     # Tietoja ohjelmasta -dialogin avaus
     def openAboutDialog(self):
-        self.aboutDialog = AboutDialog()
-        self.aboutDialog.setWindowTitle('Tietoja ohjelmasta')
-        self.aboutDialog.exec() # Luodaan dialogille event loop
+        url = QUrl('https://github.com/HennaSalla/Autolainaus_hallinta/blob/main/README.md')
+        QtGui.QDesktopServices.openUrl(url)
+
+    def openWebHelp(self):
+        url = QUrl('https://github.com/HennaSalla/Autolainaus_hallinta/wiki/K%C3%A4ytt%C3%B6ohje')
+        QtGui.QDesktopServices.openUrl(url)
 
     #Yleinen käyttöliitymän verestys (refresh)
     def refreshUi(self):
@@ -318,8 +322,12 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.diaryTableWidget.clearContents()
 
         # Määritellään taulukkoelementin otsikot
-        headerRow = ['Rekisteri', 'Merkki', 'Tarkoitus', 'HeTu', 'Sukunimi', 'Etunimi', 'Otettu', 'Palautettu']
+        headerRow = ['Rekisteri', 'Merkki', 'Malli', 'Tarkoitus', 'HeTu', 'Sukunimi', 'Etunimi', 'Otettu', 'Palautettu']
         self.ui.diaryTableWidget.setHorizontalHeaderLabels(headerRow)
+
+        # Tulosjoukon rivimäärä
+        numberOfRows = len(tableData)
+        self.ui.diaryTableWidget.setRowCount(numberOfRows)
 
         # Asetetaan taulukon solujen arvot
         for row in range(len(tableData)): # Luetaan listaa riveittäin

@@ -27,11 +27,13 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(939, 684)
+        MainWindow.resize(953, 684)
         icon = QIcon(QIcon.fromTheme(u"preferences-desktop-accessibility"))
         MainWindow.setWindowIcon(icon)
         self.actionMuokkaa = QAction(MainWindow)
         self.actionMuokkaa.setObjectName(u"actionMuokkaa")
+        self.actionOhjesivut = QAction(MainWindow)
+        self.actionOhjesivut.setObjectName(u"actionOhjesivut")
         self.actionTietoja_ohjelmasta = QAction(MainWindow)
         self.actionTietoja_ohjelmasta.setObjectName(u"actionTietoja_ohjelmasta")
         self.centralwidget = QWidget(MainWindow)
@@ -188,7 +190,7 @@ class Ui_MainWindow(object):
         self.vehicleTab.setCursor(QCursor(Qt.CursorShape.ArrowCursor))
         self.layoutWidget2 = QWidget(self.vehicleTab)
         self.layoutWidget2.setObjectName(u"layoutWidget2")
-        self.layoutWidget2.setGeometry(QRect(10, 0, 101, 241))
+        self.layoutWidget2.setGeometry(QRect(10, 0, 101, 251))
         self.vehicleLabelsVerticalLayout = QVBoxLayout(self.layoutWidget2)
         self.vehicleLabelsVerticalLayout.setObjectName(u"vehicleLabelsVerticalLayout")
         self.vehicleLabelsVerticalLayout.setContentsMargins(0, 0, 0, 0)
@@ -247,7 +249,7 @@ class Ui_MainWindow(object):
 
         self.layoutWidget_2 = QWidget(self.vehicleTab)
         self.layoutWidget_2.setObjectName(u"layoutWidget_2")
-        self.layoutWidget_2.setGeometry(QRect(120, 0, 169, 242))
+        self.layoutWidget_2.setGeometry(QRect(120, 0, 169, 251))
         self.vehicleInputsVerticalLayout = QVBoxLayout(self.layoutWidget_2)
         self.vehicleInputsVerticalLayout.setObjectName(u"vehicleInputsVerticalLayout")
         self.vehicleInputsVerticalLayout.setContentsMargins(0, 0, 0, 0)
@@ -400,15 +402,15 @@ class Ui_MainWindow(object):
         self.getReportPushButton.setStyleSheet(u"background-color: rgb(57, 136, 220);\n"
 "color: rgb(255, 255, 255);")
         self.diaryTableWidget = QTableWidget(self.reportsTab)
-        if (self.diaryTableWidget.columnCount() < 8):
-            self.diaryTableWidget.setColumnCount(8)
-        if (self.diaryTableWidget.rowCount() < 100):
-            self.diaryTableWidget.setRowCount(100)
+        if (self.diaryTableWidget.columnCount() < 9):
+            self.diaryTableWidget.setColumnCount(9)
+        if (self.diaryTableWidget.rowCount() < 10000):
+            self.diaryTableWidget.setRowCount(10000)
         self.diaryTableWidget.setObjectName(u"diaryTableWidget")
-        self.diaryTableWidget.setGeometry(QRect(0, 160, 871, 321))
+        self.diaryTableWidget.setGeometry(QRect(0, 160, 951, 321))
         self.diaryTableWidget.viewport().setProperty(u"cursor", QCursor(Qt.CursorShape.ForbiddenCursor))
-        self.diaryTableWidget.setRowCount(100)
-        self.diaryTableWidget.setColumnCount(8)
+        self.diaryTableWidget.setRowCount(10000)
+        self.diaryTableWidget.setColumnCount(9)
         self.previewLabel = QLabel(self.reportsTab)
         self.previewLabel.setObjectName(u"previewLabel")
         self.previewLabel.setGeometry(QRect(20, 140, 61, 16))
@@ -520,21 +522,25 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(MainWindow)
         self.menubar.setObjectName(u"menubar")
-        self.menubar.setGeometry(QRect(0, 0, 939, 33))
+        self.menubar.setGeometry(QRect(0, 0, 953, 33))
         self.menuAsetukset = QMenu(self.menubar)
         self.menuAsetukset.setObjectName(u"menuAsetukset")
+        self.menuOhje = QMenu(self.menubar)
+        self.menuOhje.setObjectName(u"menuOhje")
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QStatusBar(MainWindow)
         self.statusbar.setObjectName(u"statusbar")
         MainWindow.setStatusBar(self.statusbar)
 
         self.menubar.addAction(self.menuAsetukset.menuAction())
+        self.menubar.addAction(self.menuOhje.menuAction())
         self.menuAsetukset.addAction(self.actionMuokkaa)
         self.menuAsetukset.addAction(self.actionTietoja_ohjelmasta)
+        self.menuOhje.addAction(self.actionOhjesivut)
 
         self.retranslateUi(MainWindow)
 
-        self.tabWidget.setCurrentIndex(0)
+        self.tabWidget.setCurrentIndex(2)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -543,7 +549,8 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
         self.actionMuokkaa.setText(QCoreApplication.translate("MainWindow", u"Muokkaa...", None))
-        self.actionTietoja_ohjelmasta.setText(QCoreApplication.translate("MainWindow", u"Tietoja ohjelmasta...", None))
+        self.actionOhjesivut.setText(QCoreApplication.translate("MainWindow", u"Ohjesivut", None))
+        self.actionTietoja_ohjelmasta.setText(QCoreApplication.translate("MainWindow", u"Tietoja ohjelmasta", None))
         self.registeredPersonsLabel.setText(QCoreApplication.translate("MainWindow", u"Rekister\u00f6idyt lainaajat", None))
         self.savePersonPushButton.setText(QCoreApplication.translate("MainWindow", u"Tallenna", None))
         self.ssnLineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Pakollinen tieto", None))
@@ -637,5 +644,6 @@ class Ui_MainWindow(object):
         self.reasonAddLabel.setText(QCoreApplication.translate("MainWindow", u"Ajon tarkoitukset", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.maitinanceTab), QCoreApplication.translate("MainWindow", u"Yll\u00e4pito", None))
         self.menuAsetukset.setTitle(QCoreApplication.translate("MainWindow", u"Asetukset", None))
+        self.menuOhje.setTitle(QCoreApplication.translate("MainWindow", u"Ohje", None))
     # retranslateUi
 
