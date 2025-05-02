@@ -11528,13 +11528,13 @@ background-color: rgb(255, 0, 0);</string>
      <string>Asetukset</string>
     </property>
     <addaction name="actionMuokkaa"/>
-    <addaction name="actionTietoja_ohjelmasta"/>
    </widget>
    <widget class="QMenu" name="menuOhje">
     <property name="title">
      <string>Ohje</string>
     </property>
     <addaction name="actionOhjesivut"/>
+    <addaction name="actionTietoja_ohjelmasta"/>
    </widget>
    <addaction name="menuAsetukset"/>
    <addaction name="menuOhje"/>

@@ -540,8 +540,8 @@ class Ui_MainWindow(object):
         self.menubar.addAction(self.menuAsetukset.menuAction())
         self.menubar.addAction(self.menuOhje.menuAction())
         self.menuAsetukset.addAction(self.actionMuokkaa)
-        self.menuAsetukset.addAction(self.actionTietoja_ohjelmasta)
         self.menuOhje.addAction(self.actionOhjesivut)
+        self.menuOhje.addAction(self.actionTietoja_ohjelmasta)
 
         self.retranslateUi(MainWindow)
 

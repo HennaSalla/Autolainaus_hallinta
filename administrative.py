@@ -462,6 +462,10 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.notUsableVehiclePushButton.setHidden(True)
         self.ui.updatePicturePushButton.setHidden(True)
 
+        # Päivitetään kuvaksi tyhjä
+        # Asetetaan auton oletuskuvaksi harmaa kamera
+        self.vehiclePicture = 'uiPictrues\\noPicture.png'
+
     # Piilotetaan lainaajan poisto painike
     def hideDeletePersonPB(self):
         self.ui.deletePersonPushButton.setHidden(True)
@@ -752,24 +756,31 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         # Kuvan näyttö
         try:
+        # Määritellään tietokanta-asetukset
+            dbSettings = self.currentSettings
+            plainTextPassword = self.plainTextPassword
+            dbSettings['password'] = plainTextPassword
+
             #Luodaan tietokantayhteys-olio
             dbConnection = dbOperations.DbConnection(dbSettings)
-            criteria = f"rekisterinumero = '{self.ui.keysLineEdit.text()}'"
+            criteria = f"rekisterinumero = '{self.vehicleToModify}'"
 
             # Haetaan auton kuva auto-taulusta
             resultSet = dbConnection.filterColumsFromTable('auto', ['kuva'], criteria)
             row = resultSet[0]
             picture = row[0] # PNG tai JPG kuva tietokannasta
+           
+            # Tallenetaan kuva väliaikisesti levylle pixmap-muotoon muutamista varten
+            with open('currentCar.png', 'wb') as temporaryFile: 
+                temporaryFile.write(picture)
 
-            with open('currentCar.png', 'wb') as temporeryFile:
-                temporeryFile.write(picture)
-
-            pixmap = QPixmap('currentCar.png')
-            self.ui.carPicturesLabel.setPixmap(pixmap)
+            # Luodaan pixmap kuvatiedostosta ja päivitetään valitun auton kuva
+            pixmap = QtGui.QPixmap('currentCar.png')
+            self.ui.vehiclePictureLabel.setPixmap(pixmap)
 
         except Exception as e:
             title = 'Auton kuvan lataaminen ei onnistunut'
-            text = 'Jos mitään tietoja ei tullut näkyviin, ota yhteys henkilökuntaan'
+            text = 'Kuvan lataamisessa tapahtui virhe'
             detailedText = str(e)
             self.openWarning(title,text,detailedText)
 
